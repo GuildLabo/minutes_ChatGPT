@@ -72,7 +72,7 @@ def split_audio(input_audio, max_length: int, config: dict) -> list:
 
 
 # 書き起こしの作成・保存
-def mk_trans(config: dict) -> str:
+def mk_transcription(config: dict) -> str:
     src_file = config["input_audio_path"]
     file_parts = os.path.splitext(src_file)
     file_name = file_parts[0].split("/")[-1]
@@ -172,7 +172,7 @@ def use_chatGPT(target_text :str, prompt_path: str, model) -> str:
 
 
 # 入力文章から議事録を作成
-def mk_gijiroku(trans: str, config: dict):
+def mk_minutes(trans: str, config: dict):
     file_name = os.path.splitext(config["input_audio_path"])[0].split("/")[-1]
 
     # モデルごとの大体の最大トークン数
@@ -247,11 +247,11 @@ def main():
     mk_dir([config["result_dir"], config["temp_dir"]])
 
     # 書き起こしの作成
-    transcription = mk_trans(config)
+    transcription = mk_transcription(config)
 
 
     # 議事録の作成・保存
-    mk_gijiroku(transcription, config)
+    mk_minutes(transcription, config)
 
 if __name__ == '__main__':
     main()
