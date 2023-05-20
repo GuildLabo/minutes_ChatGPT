@@ -1,7 +1,7 @@
 {
     "openai_api_token": "your OpenAI API token",
 
-    "input_path": "your input file path",
+    "input_audio_path": "your input file path",
     
     "min_silence_len": 1000,
     "keep_silence": 100,
