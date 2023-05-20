@@ -1,9 +1,7 @@
 {
     "openai_api_token": "your OpenAI API token",
-    "result_dir": "./results/",
-    "temp_dir": "./temp/",
 
-    "input_audio_path": "",
+    "input_path": "your input file path",
     
     "min_silence_len": 1000,
     "keep_silence": 100,
@@ -14,6 +12,8 @@
     "prompt_split_summary":"./prompt/split_summary.txt",
 
     "model": "gpt-4",
-    "gpt-4-32k": "False"
+    "gpt-4-32k": "False", 
+
+    "mode": "subtitles"
 
 }
