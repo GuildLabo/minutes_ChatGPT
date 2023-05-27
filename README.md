@@ -17,12 +17,13 @@ ChatGPT APIとWhisper APIを活用し、音声データから書き起こしや�
 
 # 使い方
 1. requirements.textからライブラリをインストールする
-2. config.jsonで、Open API のtokenを設定する
-3. config.jsonのinput_audio_pathに入力となる音声データのパスを入れる
-4. config.jsonのmodelを選択する ("gpt-3.5-turbo". "gpt-4", "gpt-4-32k")
-5. config.jsonのmodeを選択する ("minutes", "subtitles")
-6. prpmptの中のgijiroku.txtとcompile.txtでchatGPTに入力するプロンプトを決定する（とりあえず変更せずに回してみて、出力がおかしな場合に直すとかでいいと思います）
-7. mk_gijiroku.pyを動かす
+2. FFmpegをインストールする
+3. config.jsonで、Open API のtokenを設定する
+4. config.jsonのinput_audio_pathに入力となる音声データのパスを入れる
+5. config.jsonのmodelを選択する ("gpt-3.5-turbo". "gpt-4", "gpt-4-32k")
+6. config.jsonのmodeを選択する ("minutes", "subtitles")
+7. prpmptの中のgijiroku.txtとcompile.txtでchatGPTに入力するプロンプトを決定する（とりあえず変更せずに回してみて、出力がおかしな場合に直すとかでいいと思います）
+8. mk_gijiroku.pyを動かす
 
 
 # config.jsonのキーの説明

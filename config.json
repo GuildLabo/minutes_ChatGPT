@@ -3,9 +3,9 @@
 
     "input_audio_path": "your input file path",
     
-    "min_silence_len": 1000,
-    "keep_silence": 100,
-    "silence_thresh": -16,
+    "min_silence_len": 1200,
+    "keep_silence": 600,
+    "silence_thresh": -30,
     
     "prompt_gijiroku":"./prompt/gijiroku.txt", 
     "prompt_compile":"./prompt/compile.txt",

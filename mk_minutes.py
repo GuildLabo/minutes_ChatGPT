@@ -91,6 +91,7 @@ def split_audio(input_audio: AudioSegment, max_length: int, config: dict) -> lis
         分割した音声ファイルのpathを要素とするlist
     """
 
+
     # 無音部分をカットして分割
     chunks = split_on_silence(
         input_audio,
@@ -98,33 +99,30 @@ def split_audio(input_audio: AudioSegment, max_length: int, config: dict) -> lis
         silence_thresh = config["silence_thresh"],
         keep_silence = config["keep_silence"],
     )
-    num_of_chunks = len(chunks)
 
     # 音声データを保存
     def output_mp3(chunk, output):
         chunk.export(output, format="mp3")
     
     # 分割したチャンクをmax_lengthごとに結合
-    current_chunk = None
+    current_chunk = chunks[0]
     file_path_list = []
     file_name = os.path.splitext(config["input_audio_path"])[0].split("/")[-1]
 
-    for i, c in enumerate(chunks):
-        if current_chunk is None:
-            current_chunk = c
-            continue
+    for i, c in enumerate(chunks[1:], 1):  # 1からスタート
         temp_chunk = current_chunk + c
         outFilePath = f'./temp/{file_name}_split_{i + 1}.mp3'
         if len(temp_chunk) > max_length:
             output_mp3(current_chunk, outFilePath)
+            file_path_list.append(outFilePath)
             current_chunk = c
         else:
-            if i == len(chunks) - 1:
-                output_mp3(temp_chunk, outFilePath)
-            else:
-                current_chunk += c
-        
-        file_path_list.append(outFilePath)
+            current_chunk += c
+
+        # 最後のチャンクの処理
+        if i == len(chunks) - 1:
+            output_mp3(current_chunk, outFilePath)
+            file_path_list.append(outFilePath)
     
     return file_path_list 
 
@@ -243,7 +241,7 @@ def mk_transcription(config: dict) -> str:
     file_name = file_parts[0].split("/")[-1]
 
     src_file = convert_to_mp3(input_file)
-    
+
     audio, need_split, max_length = check_file_size(src_file)
 
     # 音声分割が必要な場合
@@ -460,7 +458,7 @@ def mk_minutes(trans: str, config: dict):
 
 def main():
     # 設定ファイルの読み込み
-    with open("./config.json", "r") as f:
+    with open("./config_debug.json", "r") as f:
         config = json.load(f)
     
     # API Keyの設定
